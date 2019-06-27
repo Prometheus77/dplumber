@@ -6,11 +6,6 @@ mutate_as <- function(.data, ...) {
   names <- purrr::map_chr(dots, ~as.character(rlang::quo_get_expr(.x)))
   names(dots) <- names
 
-  get_expr <- function(q) {
-    formula <- rlang::eval_tidy(rlang::quo_get_expr(q), rlang::quo_get_env(q))
-    rlang::expr(!!formula[[2]])
-  }
-
-  exprs <- purrr::map(dots, rlang::get_expr)
-  dplyr::mutate(.data, !!!exprs)
+  exprs <- purrr::map(dots, get_expr)
+  mutate(.data, !!!exprs)
 }
