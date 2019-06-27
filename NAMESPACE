@@ -2,6 +2,7 @@
 
 export("%>%")
 export(mutate_as)
+export(summarise_as)
 importFrom(magrittr,"%>%")
 importFrom(rlang,"!!!")
 importFrom(rlang,"!!")
